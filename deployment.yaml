@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nbu-web
+  labels:
+    app: nbu-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nbu-web
+  template:
+    metadata:
+      labels:
+        app: nbu-web
+    spec:
+      containers:
+      - name: nbu-web
+        image: mo2003/nbu
+        ports:
+        - containerPort: 8000

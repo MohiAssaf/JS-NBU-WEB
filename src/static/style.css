@@ -1,0 +1,33 @@
+h1{
+    text-align: center;
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+
+.docker-containder,
+.nbu-img{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+img{
+    width: 500px;
+    display: none;
+}
+
+button{
+    background-color: lightblue;
+    color: white;
+    padding: 10px 20px;
+    border:none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: white;
+    color: lightblue;
+    padding: 15px 25px;
+    border: 3px solid lightblue;
+}
