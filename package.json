@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "mocha"
+    "test": "mocha",
+    "build": "echo 'Running build script'"
   }
 }
