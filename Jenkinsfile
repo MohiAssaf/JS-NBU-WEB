@@ -12,6 +12,12 @@ pipeline {
             }
         }
 
+        stage('Check Docker') {
+            steps {
+                sh 'which docker'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
