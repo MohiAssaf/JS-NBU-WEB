@@ -28,9 +28,12 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withDockerRegistry([credentialsId: 'dockerhub-credentials-id', url: '']) {
-                    script {
-                        docker.image(env.DOCKER_IMAGE).push()
+                script {
+                    withCredentials([string(credentialsId: 'dockerhub-credentials-id', variable: 'DOCKER_PASSWORD')]) {
+                        sh """
+                        echo $DOCKER_PASSWORD | docker login -u mo2003 --password-stdin
+                        docker push ${env.DOCKER_IMAGE}
+                        """
                     }
                 }
             }
@@ -39,7 +42,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker run -d -p 8000:8000 ${DOCKER_IMAGE}'
+                    sh """
+                    docker stop nbu_web || true
+                    docker rm nbu_web || true
+                    docker run -d --name nbu_web -p 8000:8000 ${DOCKER_IMAGE}
+                    """
                 }
             }
         }
@@ -48,6 +55,9 @@ pipeline {
     post {
         always {
             echo 'Pipeline finished!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
