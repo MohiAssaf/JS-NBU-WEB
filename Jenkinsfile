@@ -43,9 +43,9 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker stop mo2003/nbu || true
-                    docker rm mo2003/nbu || true
-                    docker run -d --name mo2003/nbu -p 8000:8000 ${DOCKER_IMAGE}
+                    docker stop nbu_web || true
+                    docker rm nbu_web || true
+                    docker run -d --name nbu_web -p 8000:8000 ${DOCKER_IMAGE}
                     """
                 }
             }
